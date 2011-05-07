@@ -15,7 +15,8 @@ try:
 except AttributeError:
     pass
 
-graphical_backend = False
+# skip gui backends if DISABLE_MPL_GUI is defined with any non-empty value
+graphical_backend = not (os.environ.get('DISABLE_MPL_GUI', False))
 
 # This dict will be updated as we try to select the best option during
 # the build process. However, values in setup.cfg will be used, if
