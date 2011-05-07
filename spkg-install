@@ -9,5 +9,24 @@ fi
 
 set -e
 
+# remove existing install
 rm -rf "$SPKG_LOCAL"/lib/python/site-packages/matplotlib
-python setup.py install
+rm -rf "$SPKG_LOCAL"/lib/python/site-packages/matplotlib*.egg-info
+rm -rf "$SPKG_LOCAL"/lib/python/site-packages/mpl_toolkits
+rm -f "$SPKG_LOCAL"/lib/python/site-packages/pylab.py
+rm -f "$SPKG_LOCAL"/lib/python/site-packages/pylab.pyc
+
+# select SPKG_LOCAL as basedirlist
+
+echo "[directories]" > setup.cfg
+echo "basedirlist = $SPKG_LOCAL" >> setup.cfg
+
+if [ $(uname) = "Darwin" ]; then
+    export PREFIX="$SPKG_LOCAL"
+    # dont' set ARCH_FLAGS
+    sed -i .bak "s/^ARCH_FLAGS/#ARCH_FLAGS/" make.osx
+    make -f make.osx mpl_build
+    make -f make.osx mpl_install
+else
+    python setup.py install
+fi

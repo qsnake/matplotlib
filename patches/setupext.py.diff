@@ -1,0 +1,13 @@
+diff --git a/setupext.py b/setupext.py
+index f6c6388..f09ea42 100644
+--- a/setupext.py
++++ b/setupext.py
+@@ -553,7 +553,7 @@ def add_numpy_flags(module):
+     module.include_dirs.append(numpy.get_include())
+ 
+ def add_png_flags(module):
+-    try_pkgconfig(module, 'libpng', 'png')
++    try_pkgconfig(module, 'libpng12', 'png12')
+     add_base_flags(module)
+     add_numpy_flags(module)
+     module.libraries.append('z')
