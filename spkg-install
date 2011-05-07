@@ -9,4 +9,5 @@ fi
 
 set -e
 
+rm -rf "$SPKG_LOCAL"/lib/python/site-packages/matplotlib
 python setup.py install
