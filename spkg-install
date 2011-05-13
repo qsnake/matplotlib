@@ -26,7 +26,7 @@ if [ $(uname) = "Darwin" ]; then
     # We use make.osx, which sets bunch of environment variables that are
     # needed on OSX
     # dont' set ARCH_FLAGS
-    /usr/bin/sed -i .bak "s/^ARCH_FLAGS/#ARCH_FLAGS/" make.osx
+    sed -i.bak "s/^ARCH_FLAGS/#ARCH_FLAGS/" make.osx
     # setup.py build:
     make -f make.osx mpl_build
     # setup.py install:
